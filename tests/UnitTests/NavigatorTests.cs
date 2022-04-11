@@ -11,7 +11,7 @@ namespace WpfNavigation.UnitTests;
 public class NavigatorTests
 {
     [StaFact]
-    public void AddRoute_Adds_DataTemplate_To_Resources()
+    public void Adding_Route_Creates_DataTemplate_In_Resources()
     {
         var routeData = CreateSampleRouteData();
         var sut = CreateSut();
