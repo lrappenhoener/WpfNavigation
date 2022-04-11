@@ -2,12 +2,12 @@ using System.Windows;
 
 namespace WpfNavigation;
 
-public class TemplateSettings<TView>
+public class TemplateSettings
 {
-    public TemplateSettings(ResourceDictionary resources)
+    public TemplateSettings(Type viewType, ResourceDictionary resources)
     {
         Resources = resources;
-        ViewType = typeof(TView);
+        ViewType = viewType;
     }
 
     public Type ViewType { get; }
