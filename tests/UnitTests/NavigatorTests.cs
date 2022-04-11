@@ -13,7 +13,7 @@ public class NavigatorTests
     [StaFact]
     public void AddRoute_Adds_DataTemplate_To_Resources()
     {
-        var routeData = CreateSampleRouteData<SampleView, SampleViewModel>();
+        var routeData = CreateSampleRouteData();
         var sut = CreateSut();
 
         sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
@@ -31,9 +31,9 @@ public class NavigatorTests
         return rootType.Name == routeData.ViewType.Name;
     }
 
-    private RouteTestData CreateSampleRouteData<TView, TContent>()
+    private RouteTestData CreateSampleRouteData()
     {
-        return new RouteTestData("RouteName", typeof(TView), typeof(TContent), new ResourceDictionary());
+        return new RouteTestData("RouteName", typeof(SampleView), typeof(SampleViewModel), new ResourceDictionary());
     }
 
     private static Navigator CreateSut()
