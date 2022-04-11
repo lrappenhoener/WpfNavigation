@@ -33,6 +33,16 @@ public class NavigatorTests
         exception.Should().NotBeNull();
     }
 
+    [StaFact]
+    public void Contains_Route_After_Adding_Route_Returns_True()
+    {
+        var routeData = CreateSampleRouteData();
+        var sut = CreateSut();
+        sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
+
+        sut.ContainsRoute(routeData.Name).Should().BeTrue();
+    }
+
     private bool ResourcesContainTemplate(RouteTestData routeData)
     {
         var expectedKey = new DataTemplateKey(routeData.TargetSettings.ContentType);
