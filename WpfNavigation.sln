@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D7BF8087-A201-4642-913A-EB7474D47C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{4B4F258B-D238-4228-A0E3-01AB4C3081F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{40E1F766-F46B-42B0-96D9-A0897F3A819F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNavigation", "src\WpfNavigation\WpfNavigation.csproj", "{753B9357-2F57-4964-83E1-381156AB9857}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B4F258B-D238-4228-A0E3-01AB4C3081F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4F258B-D238-4228-A0E3-01AB4C3081F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4F258B-D238-4228-A0E3-01AB4C3081F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4F258B-D238-4228-A0E3-01AB4C3081F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753B9357-2F57-4964-83E1-381156AB9857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753B9357-2F57-4964-83E1-381156AB9857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753B9357-2F57-4964-83E1-381156AB9857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753B9357-2F57-4964-83E1-381156AB9857}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B4F258B-D238-4228-A0E3-01AB4C3081F7} = {D7BF8087-A201-4642-913A-EB7474D47C58}
+		{753B9357-2F57-4964-83E1-381156AB9857} = {40E1F766-F46B-42B0-96D9-A0897F3A819F}
+	EndGlobalSection
+EndGlobal
