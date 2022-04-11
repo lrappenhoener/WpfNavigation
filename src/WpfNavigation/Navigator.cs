@@ -6,6 +6,8 @@ namespace WpfNavigation;
 
 public class Navigator
 {
+    private readonly Dictionary<string, Route> _routes = new Dictionary<string, Route>();
+
     public Navigator AddRoute(string name, TemplateSettings templateSettings, TargetSettings targetSettings)
     {
         var key = new DataTemplateKey(targetSettings.ContentType);
