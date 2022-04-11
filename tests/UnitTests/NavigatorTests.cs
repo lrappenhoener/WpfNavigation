@@ -34,7 +34,7 @@ public class NavigatorTests
     }
 
     [StaFact]
-    public void Contains_Route_After_Adding_Route_Returns_True()
+    public void Contains_Added_Route_Returns_True()
     {
         var routeData = CreateSampleRouteData();
         var sut = CreateSut();
