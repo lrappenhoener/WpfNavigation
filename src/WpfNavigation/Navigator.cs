@@ -1,6 +1,4 @@
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Markup;
+using System.Collections;
 
 namespace WpfNavigation;
 
@@ -14,8 +12,8 @@ public class Navigator
         return this;
     }
 
-    public bool ContainsRoute(string routeName)
+    public bool ContainsRoute(string name)
     {
-        return true;
+        return _routes.ContainsKey(name);
     }
 }
