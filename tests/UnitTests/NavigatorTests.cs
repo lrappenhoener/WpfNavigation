@@ -42,6 +42,15 @@ public class NavigatorTests
 
         sut.ContainsRoute(routeData.Name).Should().BeTrue();
     }
+    
+    [StaFact]
+    public void Contains_Unknown_Route_Returns_False()
+    {
+        var routeData = CreateSampleRouteData();
+        var sut = CreateSut();
+
+        sut.ContainsRoute(routeData.Name).Should().BeFalse();
+    }
 
     private bool ResourcesContainTemplate(RouteTestData routeData)
     {
