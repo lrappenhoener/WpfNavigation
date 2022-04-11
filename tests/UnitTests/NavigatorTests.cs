@@ -20,6 +20,18 @@ public class NavigatorTests
 
         ResourcesContainTemplate(routeData).Should().BeTrue();
     }
+    
+    [StaFact]
+    public void Adding_Same_Route_Multiple_Times_Throws()
+    {
+        var routeData = CreateSampleRouteData();
+        var sut = CreateSut();
+        sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
+
+        var exception = Record.Exception(() => sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings));
+
+        exception.Should().NotBeNull();
+    }
 
     private bool ResourcesContainTemplate(RouteTestData routeData)
     {
