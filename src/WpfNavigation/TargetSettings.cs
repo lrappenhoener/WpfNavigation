@@ -2,13 +2,13 @@ using System.Windows;
 
 namespace WpfNavigation;
 
-public class TargetSettings<TContent>
+public class TargetSettings
 {
-    public TargetSettings(UIElement root, string uid)
+    public TargetSettings(Type contentType, UIElement root, string uid)
     {
         Root = root;
         Uid = uid;
-        ContentType = typeof(TContent);
+        ContentType = contentType;
     }
 
     public Type ContentType { get; set; }
