@@ -26,4 +26,9 @@ public class Navigator
         templateSettings.Resources.Add(key, enumerator.Current);
         return this;
     }
+
+    public bool ContainsRoute(string routeName)
+    {
+        return true;
+    }
 }
