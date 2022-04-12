@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace WpfNavigation;
 
 public class Navigator
@@ -25,6 +23,7 @@ public class Navigator
 
     public void UseRoute(string name)
     {
-        throw new ArgumentException();
+        var route = _routes[name];
+        route.Execute();
     }
 }
