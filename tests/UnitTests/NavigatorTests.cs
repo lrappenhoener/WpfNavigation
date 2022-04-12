@@ -94,7 +94,12 @@ public class NavigatorTests
 
     private RouteTestData CreateSampleRouteData()
     {
-        return new RouteTestData("RouteName", typeof(SampleView), typeof(SampleViewModel), new ResourceDictionary());
+        return CreateSampleRouteData(typeof(SampleView), typeof(SampleViewModel));
+    }
+    
+    private RouteTestData CreateSampleRouteData(Type viewType, Type contentType)
+    {
+        return new RouteTestData("RouteName", viewType, contentType, new ResourceDictionary());
     }
 
     private static Navigator CreateSut()
