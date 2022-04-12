@@ -12,10 +12,14 @@ namespace WpfNavigation.UnitTests;
 
 public class NavigatorTests
 {
-    [StaFact]
-    public void Adding_Route_Creates_DataTemplate_In_Resources()
+    [StaTheory]
+    [InlineData(typeof(SampleView), typeof(SampleViewModel))]
+    [InlineData(typeof(AnotherSampleView), typeof(AnotherSampleViewModel))]
+    [InlineData(typeof(SampleView), typeof(AnotherSampleViewModel))]
+    [InlineData(typeof(AnotherSampleView), typeof(SampleViewModel))]
+    public void Adding_Route_Creates_DataTemplate_In_Resources(Type viewType, Type contentType)
     {
-        var routeData = CreateSampleRouteData();
+        var routeData = CreateSampleRouteData(viewType, contentType);
         var sut = CreateSut();
 
         sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
