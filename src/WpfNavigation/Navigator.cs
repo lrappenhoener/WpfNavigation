@@ -4,14 +4,12 @@ namespace WpfNavigation;
 
 public class Navigator
 {
-    private readonly EventAggregator _eventAggregator;
     private readonly IProvider _provider;
     private readonly Dictionary<string, Route> _routes = new();
 
     public Navigator(EventAggregator eventAggregator, IProvider provider)
     {
-        _eventAggregator = eventAggregator;
-        _eventAggregator.Subscribe<RoutingRequestEvent>((o,e) => OnRoutingRequested(e.RouteName));
+        eventAggregator.Subscribe<RoutingRequestEvent>((o,e) => OnRoutingRequested(e.RouteName));
         _provider = provider;
     }
 
