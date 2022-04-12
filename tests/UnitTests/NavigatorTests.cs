@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xaml;
 using FluentAssertions;
+using PCC.Libraries.EventAggregator;
 using WpfNavigation.UnitTests.Common;
 
 namespace WpfNavigation.UnitTests;
@@ -124,6 +125,11 @@ public class NavigatorTests
 
     private static Navigator CreateSut(IProvider provider)
     {
-        return new Navigator(provider); 
+        return CreateSut(new EventAggregator(), provider); 
+    }
+    
+    private static Navigator CreateSut(EventAggregator eventAggregator, IProvider provider)
+    {
+        return new Navigator(eventAggregator, provider); 
     }
 }
