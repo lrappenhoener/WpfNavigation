@@ -52,6 +52,17 @@ public class NavigatorTests
         sut.ContainsRoute(routeData.Name).Should().BeFalse();
     }
 
+    [StaFact]
+    public void Using_Non_Existing_Route_Throws()
+    {
+        var sut = CreateSut();
+        var routeName = "dont exists";
+
+        var exceptions = Record.Exception(() => sut.UseRoute(routeName));
+
+        exceptions.Should().NotBeNull();
+    }
+
     private bool ResourcesContainTemplate(RouteTestData routeData)
     {
         var expectedKey = new DataTemplateKey(routeData.TargetSettings.ContentType);
