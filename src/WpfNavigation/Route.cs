@@ -6,7 +6,7 @@ namespace WpfNavigation;
 
 internal class Route
 {
-    public Route(string name, TemplateSettings templateSettings, TargetSettings targetSettings)
+    public Route(string name, TemplateSettings templateSettings, TargetSettings targetSettings, IProvider provider)
     {
         var key = new DataTemplateKey(targetSettings.ContentType);
         var container = XamlReader.Parse(@"

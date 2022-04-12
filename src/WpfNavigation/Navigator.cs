@@ -4,11 +4,17 @@ namespace WpfNavigation;
 
 public class Navigator
 {
-    private readonly Dictionary<string, Route> _routes = new Dictionary<string, Route>();
+    private readonly IProvider _provider;
+    private readonly Dictionary<string, Route> _routes = new();
 
+    public Navigator(IProvider provider)
+    {
+        _provider = provider;
+    }
+    
     public Navigator AddRoute(string name, TemplateSettings templateSettings, TargetSettings targetSettings)
     {
-        _routes.Add(name, new Route(name, templateSettings, targetSettings));
+        _routes.Add(name, new Route(name, templateSettings, targetSettings, _provider));
         return this;
     }
 
