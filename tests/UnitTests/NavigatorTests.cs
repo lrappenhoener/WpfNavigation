@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xaml;
 using FluentAssertions;
 using WpfNavigation.UnitTests.Common;
@@ -63,6 +64,23 @@ public class NavigatorTests
         var exceptions = Record.Exception(() => sut.UseRoute(routeName));
 
         exceptions.Should().NotBeNull();
+    }
+    
+    [StaFact]
+    public void Using_Existing_Route_Sets_Content_At_Target()
+    {
+        var routeData = CreateSampleRouteData();
+        var expectedContent = new SampleViewModel();
+        var fakeProvider = new FakeProvider(new Dictionary<Type, object>
+        {
+            {typeof(SampleViewModel), expectedContent}
+        });
+        var sut = CreateSut(fakeProvider);
+        sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
+        
+        sut.UseRoute(routeData.Name);
+
+        routeData.Target.Content.Should().Be(expectedContent);
     }
 
     private bool ResourcesContainTemplate(RouteTestData routeData)
