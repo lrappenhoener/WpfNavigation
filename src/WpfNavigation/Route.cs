@@ -17,6 +17,7 @@ internal class Route
         var content = _provider.Resolve(_targetSettings.ContentType);
         var newContentNavigable = content as INavigable;
         var target = RouteTargetFinder.Find(_targetSettings.Root, _targetSettings.Uid);
+        if (target == null) throw new ArgumentException($"Could not find ContentControl target with Uid:{_targetSettings.Uid}");
         var currentContentNavigable = target.Content as INavigable;
 
         var ctx = new RoutingContext(target.Content, content);

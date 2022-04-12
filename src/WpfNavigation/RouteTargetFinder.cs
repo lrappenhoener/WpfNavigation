@@ -5,7 +5,7 @@ namespace WpfNavigation;
 
 internal static class RouteTargetFinder
 {
-    internal static ContentControl Find(UIElement root, string uid)
+    internal static ContentControl? Find(UIElement root, string uid)
     {
         var queue = new Queue<UIElement>();
         queue.Enqueue(root);
