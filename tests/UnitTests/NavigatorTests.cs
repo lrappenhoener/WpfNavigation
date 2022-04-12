@@ -106,6 +106,24 @@ public class NavigatorTests
         targetFinder(root).Content.Should().Be(expectedContent);
     }
     
+    [StaTheory, MemberData(nameof(TestTargetDataProvider.Get), MemberType = typeof(TestTargetDataProvider))]
+    public void Dont_Use_Route_When_Unknown_RoutingRequestEvent_Triggered(UIElement root, string uid, Func<UIElement, ContentControl> targetFinder)
+    {
+        var expectedContent = new SampleViewModel();
+        var fakeProvider = new FakeProvider(new Dictionary<Type, object>
+        {
+            {typeof(SampleViewModel), expectedContent}
+        });
+        var eventAggregator = new EventAggregator();
+        var routeData = CreateSampleRouteData(root, uid);
+        var sut = CreateSut(eventAggregator, fakeProvider);
+        sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
+
+        eventAggregator.Publish(this, new RoutingRequestEvent("Unknown RouteName"));
+        
+        targetFinder(root).Content.Should().Be("42");
+    }
+    
     private bool ResourcesContainTemplate(RouteTestData routeData)
     {
         var expectedKey = new DataTemplateKey(routeData.TargetSettings.ContentType);
