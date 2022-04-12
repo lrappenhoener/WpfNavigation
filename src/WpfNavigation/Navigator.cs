@@ -12,7 +12,7 @@ public class Navigator
     
     public Navigator AddRoute(string name, TemplateSettings templateSettings, TargetSettings targetSettings)
     {
-        _routes.Add(name, new Route(name, templateSettings, targetSettings, _provider));
+        _routes.Add(name, new Route(templateSettings, targetSettings, _provider));
         return this;
     }
 

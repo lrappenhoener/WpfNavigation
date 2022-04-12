@@ -2,15 +2,11 @@ namespace WpfNavigation;
 
 internal class Route
 {
-    private readonly string _name;
-    private readonly TemplateSettings _templateSettings;
     private readonly TargetSettings _targetSettings;
     private readonly IProvider _provider;
 
-    public Route(string name, TemplateSettings templateSettings, TargetSettings targetSettings, IProvider provider)
+    public Route(TemplateSettings templateSettings, TargetSettings targetSettings, IProvider provider)
     {
-        _name = name;
-        _templateSettings = templateSettings;
         _targetSettings = targetSettings;
         _provider = provider;
         RouteTemplates.Add(targetSettings.ContentType, templateSettings);

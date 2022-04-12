@@ -6,20 +6,20 @@ namespace WpfNavigation;
 
 internal static class RouteTemplates
 {
-    private static readonly string CONTENT_TYPE_NAMESPACE = "[CONTENT_TYPE_NAMESPACE]";
-    private static readonly string CONTENT_TYPE = "[CONTENT_TYPE]";
-    private static readonly string VIEW_TYPE_NAMESPACE = "[VIEW_TYPE_NAMESPACE]";
-    private static readonly string VIEW_TYPE = "[VIEW_TYPE]";
-    private static readonly string _templateXaml = $@"
+    private static readonly string ContentTypeNamespace = "[CONTENT_TYPE_NAMESPACE]";
+    private static readonly string ContentType = "[CONTENT_TYPE]";
+    private static readonly string ViewTypeNamespace = "[VIEW_TYPE_NAMESPACE]";
+    private static readonly string ViewType = "[VIEW_TYPE]";
+    private static readonly string TemplateXaml = $@"
             <UserControl
                     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
                     xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
-                    xmlns:contentType=""clr-namespace={CONTENT_TYPE_NAMESPACE}""
-                    xmlns:viewType=""clr-namespace={VIEW_TYPE_NAMESPACE}"">
+                    xmlns:contentType=""clr-namespace={ContentTypeNamespace}""
+                    xmlns:viewType=""clr-namespace={ViewTypeNamespace}"">
                 <UserControl.Resources>
                     <DataTemplate
-                        DataType=""contentType:{CONTENT_TYPE}"">
-                            <viewType:{VIEW_TYPE} />
+                        DataType=""contentType:{ContentType}"">
+                            <viewType:{ViewType} />
                     </DataTemplate>    
                 </UserControl.Resources>
             </UserControl>";
@@ -29,6 +29,7 @@ internal static class RouteTemplates
         var key = new DataTemplateKey(contentType);
         var template = CreateTemplateFor(contentType, templateSettings.ViewType);
         var container = XamlReader.Parse(template) as UserControl;
+        if (container == null) throw new ArgumentException();
         var enumerator = container.Resources.Values.GetEnumerator();
         enumerator.MoveNext();
         templateSettings.Resources.Add(key, enumerator.Current);        
@@ -36,10 +37,10 @@ internal static class RouteTemplates
 
     private static string CreateTemplateFor(Type contentType, Type viewType)
     {
-        return _templateXaml
-            .Replace(CONTENT_TYPE_NAMESPACE, contentType.Namespace)
-            .Replace(CONTENT_TYPE, contentType.Name)
-            .Replace(VIEW_TYPE_NAMESPACE, viewType.Namespace)
-            .Replace(VIEW_TYPE, viewType.Name);
+        return TemplateXaml
+            .Replace(ContentTypeNamespace, contentType.Namespace)
+            .Replace(ContentType, contentType.Name)
+            .Replace(ViewTypeNamespace, viewType.Namespace)
+            .Replace(ViewType, viewType.Name);
     }
 }

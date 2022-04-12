@@ -12,7 +12,7 @@ public class TestTargetDataProvider
     {
         return new object[]
         {
-            new object[]
+            new[]
             {
                 XamlReader.Parse(@$"
                         <UserControl 
@@ -44,11 +44,11 @@ public class TestTargetDataProvider
                         </UserControl>
                     "),
                 "TestTarget",
-                new Func<UIElement, ContentControl>((root) =>
+                new Func<UIElement, ContentControl?>((root) =>
                     (((((root as UserControl)?.Content as Grid)?.Children[0] as ItemsControl)?.Items[1] as
                         ItemsControl)?.Items[0] as ContentControl))
             },
-            new object[]
+            new[]
             {
                 XamlReader.Parse(@$"
                         <UserControl 
@@ -74,11 +74,11 @@ public class TestTargetDataProvider
                         </UserControl>
                     "),
                 "TestTarget",
-                new Func<UIElement, ContentControl>((root) =>
+                new Func<UIElement, ContentControl?>((root) =>
                     (((((root as UserControl)?.Content as Grid)?.Children[0] as Button)?.Content as
                         StackPanel)?.Children[0] as ItemsControl)?.Items[1] as ContentControl)
             },
-            new object[]
+            new[]
             {
                 XamlReader.Parse(@$"
                         <UserControl 
@@ -108,7 +108,7 @@ public class TestTargetDataProvider
                         </UserControl>
                     "),
                 "TestTarget",
-                new Func<UIElement, ContentControl>((root) =>
+                new Func<UIElement, ContentControl?>((root) =>
                     (((((((root as UserControl)?.Content as Grid)?.Children[0] as Button)?.Content as Button)?.Content as 
                         StackPanel)?.Children[0] as ItemsControl)?.Items[1] as ContentControl)?.Content as ContentControl)
             }

@@ -1,6 +1,5 @@
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Markup;
 
 namespace WpfNavigation.UnitTests.Common;
@@ -43,7 +42,9 @@ internal class RouteTestData
         Resources = resources;
         ViewType = viewType;
         ContentType = contentType;
-        TargetSettings = new TargetSettings(contentType, XamlReader.Parse(_rootXaml) as UIElement, "TestTarget");
+        var root = XamlReader.Parse(_rootXaml) as UIElement;
+        if (root == null) throw new ArgumentException();
+        TargetSettings = new TargetSettings(contentType, root, "TestTarget");
         TemplateSettings = new TemplateSettings(viewType, resources);
     }
     

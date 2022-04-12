@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Xaml;
 using FluentAssertions;
 using WpfNavigation.UnitTests.Common;
-using XamlReader = System.Windows.Markup.XamlReader;
 
 namespace WpfNavigation.UnitTests;
 
