@@ -16,4 +16,9 @@ public class Navigator
     {
         return _routes.ContainsKey(name);
     }
+
+    public void UseRoute(string name)
+    {
+        throw new ArgumentException();
+    }
 }
