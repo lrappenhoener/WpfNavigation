@@ -13,28 +13,24 @@ internal static class RouteTargetFinder
         {
             var current = queue.Dequeue();
             if (current.Uid == uid) return current as ContentControl;
-            if (current is Panel panel)
-            {
-                foreach (UIElement child in panel.Children)
-                {
-                    queue.Enqueue(child);
-                }
-            }
-            else if (current is ItemsControl itemsControl)
-            {
-                foreach (var child in itemsControl.Items)
-                {
-                    if (child is UIElement uiChild)
-                        queue.Enqueue(uiChild);
-                }
-            }
-            else if (current is ContentControl contentControl)
-            {
-                if (contentControl.Content is UIElement contentChild)
-                    queue.Enqueue(contentChild);
-            }
+            var children = GetChildren(current);
+            QueueChildren(queue, children);
         }
-
         return null;
+    }
+
+    private static void QueueChildren(Queue<UIElement> queue, IEnumerable<UIElement> children)
+    {
+        foreach (var child in children)
+            queue.Enqueue(child);
+    }
+
+    private static IEnumerable<UIElement> GetChildren(UIElement current)
+    {
+        if (current is Panel panel) return panel.Children.OfType<UIElement>();
+        if (current is ItemsControl itemsControl) return itemsControl.Items.OfType<UIElement>();
+        if (current is ContentControl contentControl && contentControl.Content is UIElement uiElement)
+            return new List<UIElement> {uiElement};
+        return new List<UIElement>();
     }
 }
