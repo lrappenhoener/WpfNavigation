@@ -2,13 +2,11 @@ namespace WpfNavigation;
 
 public class RoutingContext
 {
-    public RoutingContext(object? from, object? to, Navigator navigator)
+    public RoutingContext(object? from, object? to)
     {
         From = @from;
         To = to;
-        Navigator = navigator;
     }
     public object? From { get; }
     public object? To { get; }
-    public Navigator Navigator { get; }
 }
