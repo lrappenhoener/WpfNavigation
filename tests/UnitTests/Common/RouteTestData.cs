@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xml;
 using System.Windows.Markup;
 
 namespace WpfNavigation.UnitTests.Common;

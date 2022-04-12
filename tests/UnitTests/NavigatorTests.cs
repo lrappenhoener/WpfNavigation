@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 using System.Windows;
-using System.Windows.Controls;
 using System.Xaml;
 using FluentAssertions;
 using WpfNavigation.UnitTests.Common;
