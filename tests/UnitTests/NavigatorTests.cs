@@ -87,6 +87,28 @@ public class NavigatorTests
 
         targetFinder(root).Content.Should().Be(expectedContent);
     }
+    
+    [StaTheory, MemberData(nameof(TestTargetDataProvider.Get), MemberType = typeof(TestTargetDataProvider))]
+    public void Using_Existing_Route_Calls_Navigable_Content_Methods(UIElement root, string uid, Func<UIElement, ContentControl> targetFinder)
+    {
+        var routeData = CreateSampleRouteData(root, uid);
+        var activated = new NavigableSampleViewModel();
+        var deactivated = new NavigableSampleViewModel();
+        targetFinder(root).Content = deactivated;
+        var fakeProvider = new FakeProvider(new Dictionary<Type, object>
+        {
+            {typeof(SampleViewModel), activated}
+        });
+        var sut = CreateSut(fakeProvider);
+        sut.AddRoute(routeData.Name, routeData.TemplateSettings, routeData.TargetSettings);
+        
+        sut.UseRoute(routeData.Name);
+
+        activated.PreActivationOrder.Should().Be(1);
+        activated.PostActivationOrder.Should().Be(2);
+        deactivated.PreDeactivationOrder.Should().Be(1);
+        deactivated.PostDeactivationOrder.Should().Be(2);
+    }
 
     [StaTheory, MemberData(nameof(TestTargetDataProvider.Get), MemberType = typeof(TestTargetDataProvider))]
     public void Use_Known_Route_When_RoutingRequestEvent_Triggered(UIElement root, string uid, Func<UIElement, ContentControl> targetFinder)
