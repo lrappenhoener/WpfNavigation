@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Windows.Markup;
 
@@ -47,6 +48,9 @@ internal class RouteTestData
         TemplateSettings = new TemplateSettings(viewType, resources);
     }
 
+    public ContentControl Target =>
+        (((((TargetSettings.Root as UserControl)?.Content as Grid)?.Children[0] as ItemsControl)?.Items[1] as
+            ItemsControl)?.Items[0] as ContentControl);
     public Type ViewType { get; }
     public ResourceDictionary Resources { get; }
     public string Name { get; }
