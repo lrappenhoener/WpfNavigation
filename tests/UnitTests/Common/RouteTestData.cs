@@ -46,14 +46,11 @@ internal class RouteTestData
         TargetSettings = new TargetSettings(contentType, XamlReader.Parse(_rootXaml) as UIElement, "TestTarget");
         TemplateSettings = new TemplateSettings(viewType, resources);
     }
-
-    public ContentControl Target =>
-        (((((TargetSettings.Root as UserControl)?.Content as Grid)?.Children[0] as ItemsControl)?.Items[1] as
-            ItemsControl)?.Items[0] as ContentControl);
-    public Type ViewType { get; }
-    public ResourceDictionary Resources { get; }
-    public string Name { get; }
-    public Type ContentType { get; }
-    public TargetSettings TargetSettings { get; }
-    public TemplateSettings TemplateSettings { get; }
+    
+    public Type ViewType { get; set; }
+    public ResourceDictionary Resources { get; set; }
+    public string Name { get; set; }
+    public Type ContentType { get; set; }
+    public TargetSettings TargetSettings { get; set; }
+    public TemplateSettings TemplateSettings { get; set; }
 }

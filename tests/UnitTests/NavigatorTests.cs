@@ -4,9 +4,11 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xaml;
 using FluentAssertions;
 using WpfNavigation.UnitTests.Common;
+using XamlReader = System.Windows.Markup.XamlReader;
 
 namespace WpfNavigation.UnitTests;
 
@@ -69,10 +71,10 @@ public class NavigatorTests
         exceptions.Should().NotBeNull();
     }
     
-    [StaFact]
-    public void Using_Existing_Route_Sets_Content_At_Target()
+    [StaTheory, MemberData(nameof(TestTargetDataProvider.Get), MemberType = typeof(TestTargetDataProvider))]
+    public void Using_Existing_Route_Sets_Content_At_Target(UIElement root, string uid, Func<UIElement, ContentControl> targetFinder)
     {
-        var routeData = CreateSampleRouteData();
+        var routeData = CreateSampleRouteData(root, uid);
         var expectedContent = new SampleViewModel();
         var fakeProvider = new FakeProvider(new Dictionary<Type, object>
         {
@@ -83,7 +85,7 @@ public class NavigatorTests
         
         sut.UseRoute(routeData.Name);
 
-        routeData.Target.Content.Should().Be(expectedContent);
+        targetFinder(root).Content.Should().Be(expectedContent);
     }
 
     private bool ResourcesContainTemplate(RouteTestData routeData)
@@ -99,6 +101,13 @@ public class NavigatorTests
     private RouteTestData CreateSampleRouteData()
     {
         return CreateSampleRouteData(typeof(SampleView), typeof(SampleViewModel));
+    }
+    
+    private RouteTestData CreateSampleRouteData(UIElement root, string uid)
+    {
+        var data = CreateSampleRouteData(typeof(SampleView), typeof(SampleViewModel));
+        data.TargetSettings = new TargetSettings(typeof(SampleViewModel), root, uid);
+        return data;
     }
     
     private RouteTestData CreateSampleRouteData(Type viewType, Type contentType)
