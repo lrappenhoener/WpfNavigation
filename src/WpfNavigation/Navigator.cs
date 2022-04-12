@@ -9,7 +9,7 @@ public class Navigator
 
     public Navigator(EventAggregator eventAggregator, IProvider provider)
     {
-        eventAggregator.Subscribe<RoutingRequestEvent>((o,e) => OnRoutingRequested(e.RouteName));
+        eventAggregator.Subscribe<RoutingRequestEvent>((_,e) => OnRoutingRequested(e.RouteName));
         _provider = provider;
     }
 
