@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -80,6 +82,14 @@ public class NavigatorTests
 
     private static Navigator CreateSut()
     {
-        return new Navigator();
+        return CreateSut(new FakeProvider(new Dictionary<Type, object>
+        {
+            {typeof(SampleViewModel), new SampleViewModel()}
+        }));
+    }
+
+    private static Navigator CreateSut(IProvider provider)
+    {
+        return new Navigator(provider); 
     }
 }
