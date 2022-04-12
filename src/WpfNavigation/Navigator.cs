@@ -11,9 +11,16 @@ public class Navigator
     public Navigator(EventAggregator eventAggregator, IProvider provider)
     {
         _eventAggregator = eventAggregator;
+        _eventAggregator.Subscribe<RoutingRequestEvent>((o,e) => OnRoutingRequested(e.RouteName));
         _provider = provider;
     }
-    
+
+    private void OnRoutingRequested(string name)
+    {
+        if (!ContainsRoute(name)) return;
+        UseRoute(name);
+    }
+
     public Navigator AddRoute(string name, TemplateSettings templateSettings, TargetSettings targetSettings)
     {
         _routes.Add(name, new Route(templateSettings, targetSettings, _provider));
