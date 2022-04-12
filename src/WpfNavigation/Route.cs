@@ -24,40 +24,7 @@ internal class Route
     public void Execute()
     {
         var content = _provider.Resolve(_targetSettings.ContentType);
-        var target = FindTarget();
+        var target = RouteTargetFinder.Find(_targetSettings.Root, _targetSettings.Uid);
         target.Content = content;
-    }
-
-    private ContentControl FindTarget()
-    {
-        var queue = new Queue<UIElement>();
-        queue.Enqueue(_targetSettings.Root);
-        while (queue.Count > 0)
-        {
-            var current = queue.Dequeue();
-            if (current.Uid == _targetSettings.Uid) return current as ContentControl;
-            if (current is Panel panel)
-            {
-                foreach (UIElement child in panel.Children)
-                {
-                    queue.Enqueue(child);
-                }
-            }
-            else if (current is ItemsControl itemsControl)
-            {
-                foreach (var child in itemsControl.Items)
-                {
-                    if (child is UIElement uiChild)
-                        queue.Enqueue(uiChild);
-                }
-            }
-            else if (current is ContentControl contentControl)
-            {
-                if (contentControl.Content is UIElement contentChild)
-                    queue.Enqueue(contentChild);
-            }
-        }
-
-        return null;
     }
 }
